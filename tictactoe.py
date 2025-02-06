@@ -51,7 +51,7 @@ class TicTacToe:
             if count_same == self.board_size:
                 return self.board[i]
 
-        # Check diagonals
+        # Check diagonal 1 (top-left to bottom-right)
         count_same = 0
         for i in range(0, self.total_squares, self.board_size + 1):
             if self.board[i] == self.board[0] != BLANK_SQUARE:
@@ -59,8 +59,9 @@ class TicTacToe:
         if count_same == self.board_size:
             return self.board[0]
 
+        # Check diagonal 2 (top-right to bottom-left)
         count_same = 0
-        for i in range(self.board_size - 1, self.total_squares - 1, self.board_size - 1):
+        for i in range(self.board_size - 1, self.total_squares, self.board_size - 1):
             if self.board[i] == self.board[self.board_size - 1] != BLANK_SQUARE:
                 count_same += 1
         if count_same == self.board_size:
