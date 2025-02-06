@@ -33,38 +33,25 @@ class TicTacToe:
             print('Invalid move!')
 
     def check_winner(self):
-        # Check rows
-        for i in range(0, self.total_squares, self.board_size):
-            count_same = 1
-            for j in range(i + 1, i + self.board_size):
-                if self.board[j] == self.board[j-1] != BLANK_SQUARE:
-                    count_same += 1
-            if count_same == self.board_size:
-                return self.board[i]
+        def is_winner(sequence):
+            return len(set(sequence)) == 1 and sequence[0] != BLANK_SQUARE
 
-        # Check columns
+        # Check rows and columns
         for i in range(self.board_size):
-            count_same = 1
-            for j in range(i + self.board_size, self.total_squares, self.board_size):
-                if self.board[j] == self.board[j - self.board_size] != BLANK_SQUARE:
-                    count_same += 1
-            if count_same == self.board_size:
-                return self.board[i]
+            row = self.board[i * self.board_size:(i + 1) * self.board_size]
+            col = self.board[i::self.board_size]
+            
+            if is_winner(row):
+                return row[0]
+            if is_winner(col):
+                return col[0]
 
         # Check diagonal 1 (top-left to bottom-right)
-        count_same = 0
-        for i in range(0, self.total_squares, self.board_size + 1):
-            if self.board[i] == self.board[0] != BLANK_SQUARE:
-                count_same += 1
-        if count_same == self.board_size:
+        if is_winner([self.board[i * self.board_size + i] for i in range(self.board_size)]):
             return self.board[0]
 
         # Check diagonal 2 (top-right to bottom-left)
-        count_same = 0
-        for i in range(self.board_size - 1, self.total_squares, self.board_size - 1):
-            if self.board[i] == self.board[self.board_size - 1] != BLANK_SQUARE:
-                count_same += 1
-        if count_same == self.board_size:
+        if is_winner([self.board[i * self.board_size + (self.board_size - 1 - i)] for i in range(self.board_size)]):
             return self.board[self.board_size - 1]
 
         return None
