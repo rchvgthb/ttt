@@ -25,10 +25,7 @@ class TicTacToe:
     def make_move(self, position):
         if self.board[position] == BLANK_SQUARE:
             self.board[position] = self.current_player
-            if self.current_player == 'X':
-                self.current_player = 'O'
-            else:
-                self.current_player = 'X'
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
         else:
             print('Invalid move!')
 
