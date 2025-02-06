@@ -1,4 +1,6 @@
 BLANK_SQUARE = '_'
+MIN_BOARD_SIZE = 3
+MAX_BOARD_SIZE = 20
 
 
 class TicTacToe:
@@ -75,7 +77,13 @@ class TicTacToe:
 
 
 # Main program starts here
-board_size = int(input('What board size do you want? '))
+while True:
+    try:
+        board_size = int(input(f'What board size do you want? ({MIN_BOARD_SIZE}-{MAX_BOARD_SIZE}): '))
+        if MIN_BOARD_SIZE <= board_size <= MAX_BOARD_SIZE: break
+    except ValueError:
+        pass
+    print(f"Invalid input! Please enter a board size between {MIN_BOARD_SIZE} and {MAX_BOARD_SIZE}.")
 
 game = TicTacToe(board_size=board_size)
 
