@@ -90,7 +90,13 @@ game = TicTacToe(board_size=board_size)
 # Game loop
 while game.check_winner() is None and not game.check_draw():
     game.print_board()
-    position = int(input(f'Enter position (0 - {game.total_squares - 1}): '))
-    game.make_move(position)
+    try:
+        position = int(input(f'Enter position (0 - {game.total_squares - 1}): '))
+        if 0 <= position < game.total_squares:
+            game.make_move(position)
+        else:
+            raise ValueError
+    except ValueError:
+        print(f"Invalid input! Please enter a position between 0 and {game.total_squares - 1}.")
 
 game.print_board()
