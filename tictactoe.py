@@ -76,8 +76,10 @@ while True:
 game = TicTacToe(board_size=board_size)
 
 # Game loop
-while game.check_winner() is None and not game.check_draw():
+winner = None
+while winner is None and not game.check_draw():
     game.print_board()
+
     try:
         position = int(input(f'Enter position (0 - {game.total_squares - 1}): '))
         if 0 <= position < game.total_squares:
@@ -86,5 +88,8 @@ while game.check_winner() is None and not game.check_draw():
             raise ValueError
     except ValueError:
         print(f"Invalid input! Please enter a position between 0 and {game.total_squares - 1}.")
+        
+    winner = game.check_winner()
 
 game.print_board()
+print(f"{winner} wins!" if winner else "It's a draw!")
