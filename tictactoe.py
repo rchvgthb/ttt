@@ -66,7 +66,7 @@ class TicTacToe:
         return BLANK_SQUARE not in self.board
 
     def reset(self):
-        self.board = [BLANK_SQUARE] * 9
+        self.board = [BLANK_SQUARE] * (self.board_size ** 2)
         self.current_player = 'X'
 
 
